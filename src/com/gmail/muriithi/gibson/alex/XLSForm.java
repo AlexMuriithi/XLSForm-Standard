@@ -23,7 +23,7 @@ public class XLSForm {
 	private static final String SURVEY = "survey";
 	private static final String CHOICES = "choices";
 	private static final String SETTINGS = "settings";
-	// private static final String INSTRUCTION = "instruction";
+	private static final String INSTRUCTION = "instruction";
 
 	public static void main(String[] args) {
 
@@ -125,8 +125,18 @@ public class XLSForm {
 		Cell default_language = settingsRow.createCell(4);
 		default_language.setCellValue("default_language");
 
-		// Sheet instructionsSheet = workbook.createSheet(INSTRUCTION);
-
+		Sheet instructionsSheet = workbook.createSheet(INSTRUCTION);
+		Row instructionsRow = instructionsSheet.createRow(0);
+		
+		Cell se = instructionsRow.createCell(0);
+		se.setCellValue("se");
+		
+		Cell instructionStandard = instructionsRow.createCell(1);
+		instructionStandard.setCellValue("Standard");
+		
+		Cell instructionNotes = instructionsRow.createCell(2);
+		instructionNotes.setCellValue("Notes");
+		
 		try {
 			FileOutputStream output = new FileOutputStream("XLSTrail.xls");
 			workbook.write(output);
