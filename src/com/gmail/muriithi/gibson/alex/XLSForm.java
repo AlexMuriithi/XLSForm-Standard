@@ -10,6 +10,14 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+/**
+ * XLSForm Template from Specifications defined at XLSForm org
+ * 
+ * @see <a href = "http://xlsform.org/"> XLSForm.org </a>
+ * 
+ * @author Alex Muriithi (alex.gibson.muriithi@gmail.com)
+ * */
+
 public class XLSForm {
 
 	private static final String SURVEY = "survey";
