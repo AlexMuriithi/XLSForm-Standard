@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * XLSForm Template from Specifications defined at XLSForm org
@@ -29,7 +30,8 @@ public class XLSForm {
 	public XLSForm() {
 
 		Sheet FormulaeTest = workbook.createSheet(INSTRUCTION);
-		FormulaeTest.setColumnWidth(0, 7000);		
+		FormulaeTest.setColumnWidth(0, 7000);	
+		FormulaeTest.addMergedRegion(new CellRangeAddress(/*ROW*/0, 0,/*COLUMN*/ 0, 4));
 		
 		CellStyle style = workbook.createCellStyle();
 		style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
