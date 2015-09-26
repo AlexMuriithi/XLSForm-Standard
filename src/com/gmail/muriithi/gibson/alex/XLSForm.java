@@ -29,7 +29,8 @@ public class XLSForm {
 	public XLSForm() {
 
 		Sheet FormulaeTest = workbook.createSheet(INSTRUCTION);
-
+		FormulaeTest.setColumnWidth(0, 7000);		
+		
 		CellStyle style = workbook.createCellStyle();
 		style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
 		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
@@ -47,31 +48,36 @@ public class XLSForm {
 		font.setFontName("Trebuchet MS");
 
 		style.setFont(font);
-
-		Cell cell1 = FormulaeTest.createRow(0).createCell(0);
-		Cell cell2 = FormulaeTest.createRow(0).createCell(1);
-		Cell cell3 = FormulaeTest.createRow(0).createCell(2);
-		Cell cell4 = FormulaeTest.createRow(0).createCell(3);
-		Cell cell5 = FormulaeTest.createRow(0).createCell(4);
+		
+		Cell instructionTitle = FormulaeTest.createRow(0).createCell(0);
+		instructionTitle.setCellValue(INSTRUCTION);
+		instructionTitle.setCellStyle(style);
+		instructionTitle.getRow().setHeightInPoints(45);
+				
+		Cell cell1 = FormulaeTest.createRow(1).createCell(0);
+		Cell cell2 = FormulaeTest.createRow(1).createCell(1);
+		Cell cell3 = FormulaeTest.createRow(1).createCell(2);
+		Cell cell4 = FormulaeTest.createRow(1).createCell(3);
+		Cell cell5 = FormulaeTest.createRow(1).createCell(4);
 
 		cell1.setCellValue(100);
 		cell2.setCellValue("+");
 		cell3.setCellValue(200);
 		cell4.setCellValue("=");
-		cell5.setCellFormula("A1+C1");
+		cell5.setCellFormula("A2+C2");
 		cell5.setCellStyle(style);
 
-		Cell cell6 = FormulaeTest.createRow(1).createCell(0);
-		Cell cell7 = FormulaeTest.createRow(1).createCell(1);
-		Cell cell8 = FormulaeTest.createRow(1).createCell(2);
-		Cell cell9 = FormulaeTest.createRow(1).createCell(3);
-		Cell cell0 = FormulaeTest.createRow(1).createCell(4);
+		Cell cell6 = FormulaeTest.createRow(2).createCell(0);
+		Cell cell7 = FormulaeTest.createRow(2).createCell(1);
+		Cell cell8 = FormulaeTest.createRow(2).createCell(2);
+		Cell cell9 = FormulaeTest.createRow(2).createCell(3);
+		Cell cell0 = FormulaeTest.createRow(2).createCell(4);
 
 		cell6.setCellValue(100);
 		cell7.setCellValue(200);
 		cell8.setCellValue(300);
 		cell9.setCellValue(400);
-		cell0.setCellFormula("SUM(A2:D2)");
+		cell0.setCellFormula("SUM(A3:D3)");
 		cell0.setCellStyle(style);
 
 		try {
