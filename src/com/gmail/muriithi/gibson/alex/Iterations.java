@@ -3,7 +3,6 @@ package com.gmail.muriithi.gibson.alex;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Iterator;
 
 import javax.swing.JFileChooser;
 
@@ -13,6 +12,12 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 
+/**
+ * Reading excel data and displaying them on the console
+ * 
+ * @author AlexMuriithi (alex.gibson.muriithi@gmail.com)
+ *
+ */
 public class Iterations {
 
 	public static void main(String[] args) {
@@ -25,11 +30,8 @@ public class Iterations {
 				Workbook workbook = new HSSFWorkbook(new FileInputStream(fileChooser.getSelectedFile()));
 				Sheet sheet = workbook.getSheetAt(0);
 
-				for (Iterator<Row> rit = sheet.rowIterator(); rit.hasNext();) {
-					Row row = rit.next();
-
-					for (Iterator<Cell> cit = row.cellIterator(); cit.hasNext();) {
-						Cell cell = cit.next();
+				for (Row row : sheet) {
+					for (Cell cell : row) {
 						cell.setCellType(Cell.CELL_TYPE_STRING);
 						System.out.print(cell.getStringCellValue() + "\t");
 					}
