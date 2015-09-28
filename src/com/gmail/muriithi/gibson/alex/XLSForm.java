@@ -6,9 +6,12 @@ import java.io.IOException;
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Font;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.util.CellRangeAddress;
 
 /**
  * XLSForm Template from Specifications defined at XLSForm org
@@ -16,127 +19,69 @@ import org.apache.poi.ss.usermodel.Workbook;
  * @see <a href = "http://xlsform.org/"> XLSForm.org </a>
  * 
  * @author Alex Muriithi (alex.gibson.muriithi@gmail.com)
- * */
+ */
 
 public class XLSForm {
 
-	private static final String SURVEY = "survey";
-	private static final String CHOICES = "choices";
-	private static final String SETTINGS = "settings";
+	Workbook workbook = new HSSFWorkbook();
+
 	private static final String INSTRUCTION = "instruction";
 
-	public static void main(String[] args) {
+	public XLSForm() {
 
-		Workbook workbook = new HSSFWorkbook();
+		Sheet FormulaeTest = workbook.createSheet(INSTRUCTION);
+		FormulaeTest.setColumnWidth(0, 7000);	
+		FormulaeTest.addMergedRegion(new CellRangeAddress(/*ROW*/0, 0,/*COLUMN*/ 0, 4));
+		
+		CellStyle style = workbook.createCellStyle();
+		style.setFillForegroundColor(IndexedColors.BLUE.getIndex());
+		style.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		style.setAlignment(CellStyle.ALIGN_CENTER);
+		style.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		style.setBorderBottom(CellStyle.BORDER_THICK);
+		style.setBorderBottom(IndexedColors.GREEN.getIndex());
 
-		// === Survey Sheet ===
-		Sheet surveySheet = workbook.createSheet(SURVEY);
-		Row surveyRow = surveySheet.createRow(0);
+		Font font = workbook.createFont();
+		font.setColor(IndexedColors.YELLOW.getIndex());
+		font.setBoldweight(Font.BOLDWEIGHT_BOLD);
+		font.setItalic(true);
+		font.setFontHeightInPoints((short) 16);
+		font.setUnderline(Font.U_DOUBLE);
+		font.setFontName("Trebuchet MS");
 
-		Cell type = surveyRow.createCell(0);
-		type.setCellValue("type");
+		style.setFont(font);
 		
-		Cell surveyName = surveyRow.createCell(1);
-		surveyName.setCellValue("name");
-		
-		Cell surveyLabel = surveyRow.createCell(2);
-		surveyLabel.setCellValue("label");
-		
-		Cell surveyHint = surveyRow.createCell(3);
-		surveyHint.setCellValue("hint");
-		
-		Cell constraint = surveyRow.createCell(4);
-		constraint.setCellValue("constraint");
-		
-		Cell constraint_message = surveyRow.createCell(5);
-		constraint_message.setCellValue("constraint_message");
-		
-		Cell required = surveyRow.createCell(6);
-		required.setCellValue("required");
-		
-		Cell surveyDefault = surveyRow.createCell(7);
-		surveyDefault.setCellValue("default");
-		
-		Cell relevant = surveyRow.createCell(8);
-		relevant.setCellValue("relevant");
-		
-		Cell read_only = surveyRow.createCell(9);
-		read_only.setCellValue("read_only");
-		
-		Cell calculation = surveyRow.createCell(10);
-		calculation.setCellValue("calculation");
-		
-		Cell appearance = surveyRow.createCell(11);
-		appearance.setCellValue("appearance");
-		
-		Cell hint_label_language = surveyRow.createCell(12);
-		hint_label_language.setCellValue("hint/label::language");
-		
-		Cell media_image = surveyRow.createCell(13);
-		media_image.setCellValue("media::image");
-		
-		Cell media_audio = surveyRow.createCell(14);
-		media_audio.setCellValue("media::audio");
-		
-		Cell media_video = surveyRow.createCell(15);
-		media_video.setCellValue("media::video");
-		
-		Cell media_image_language = surveyRow.createCell(16);
-		media_image_language.setCellValue("media::image::language");
-		
-		Cell media_audio_language = surveyRow.createCell(17);
-		media_audio_language.setCellValue("media::audio::language");
-		
-		Cell media_video_language = surveyRow.createCell(18);
-		media_video_language.setCellValue("media::video::language");
-		
-		// === Choices Sheet ===
-		Sheet choicesSheet = workbook.createSheet(CHOICES);
-		Row choicesRow = choicesSheet.createRow(0);
+		Cell instructionTitle = FormulaeTest.createRow(0).createCell(0);
+		instructionTitle.setCellValue(INSTRUCTION);
+		instructionTitle.setCellStyle(style);
+		instructionTitle.getRow().setHeightInPoints(45);
+				
+		Cell cell1 = FormulaeTest.createRow(1).createCell(0);
+		Cell cell2 = FormulaeTest.createRow(1).createCell(1);
+		Cell cell3 = FormulaeTest.createRow(1).createCell(2);
+		Cell cell4 = FormulaeTest.createRow(1).createCell(3);
+		Cell cell5 = FormulaeTest.createRow(1).createCell(4);
 
-		Cell list_name = choicesRow.createCell(0);
-		list_name.setCellValue("list_name");
-		
-		Cell rowName = choicesRow.createCell(1);
-		rowName.setCellValue("name");
-		
-		Cell rowLabel = choicesRow.createCell(2);
-		rowLabel.setCellValue("label");
-		
-		Cell rowMedia = choicesRow.createCell(3);
-		rowMedia.setCellValue("media");
+		cell1.setCellValue(100);
+		cell2.setCellValue("+");
+		cell3.setCellValue(200);
+		cell4.setCellValue("=");
+		cell5.setCellFormula("A2+C2");
+		cell5.setCellStyle(style);
 
-		// === Settings Sheet ===
-		Sheet settingsSheet = workbook.createSheet(SETTINGS);
-		Row settingsRow = settingsSheet.createRow(0);
+		Cell cell6 = FormulaeTest.createRow(2).createCell(0);
+		Cell cell7 = FormulaeTest.createRow(2).createCell(1);
+		Cell cell8 = FormulaeTest.createRow(2).createCell(2);
+		Cell cell9 = FormulaeTest.createRow(2).createCell(3);
+		Cell cell0 = FormulaeTest.createRow(2).createCell(4);
 
-		Cell form_title = settingsRow.createCell(0);
-		form_title.setCellValue("form_title");
+		cell6.setCellValue(100);
+		cell7.setCellValue(200);
+		cell8.setCellValue(300);
+		cell9.setCellValue(400);
+		cell0.setCellFormula("SUM(A3:D3)");
+		cell0.setCellStyle(style);
 
-		Cell form_id = settingsRow.createCell(1);
-		form_id.setCellValue("form_id");
-
-		Cell public_key = settingsRow.createCell(2);
-		public_key.setCellValue("public_key");
-
-		Cell submission_url = settingsRow.createCell(3);
-		submission_url.setCellValue("submission_url");
-
-		Cell default_language = settingsRow.createCell(4);
-		default_language.setCellValue("default_language");
-
-		Sheet instructionsSheet = workbook.createSheet(INSTRUCTION);
-		Row instructionsRow = instructionsSheet.createRow(0);
-		
-		Cell se = instructionsRow.createCell(0);
-		se.setCellValue("se");
-		
-		Cell instructionStandard = instructionsRow.createCell(1);
-		instructionStandard.setCellValue("Standard");
-		
-		Cell instructionNotes = instructionsRow.createCell(2);
-		instructionNotes.setCellValue("Notes");
-		
 		try {
 			FileOutputStream output = new FileOutputStream("XLSTrail.xls");
 			workbook.write(output);
@@ -150,4 +95,7 @@ public class XLSForm {
 
 	}
 
+	/*public static void main(String[] args) {
+		new XLSForm();
+	}*/
 }
